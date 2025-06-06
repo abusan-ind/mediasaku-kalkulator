@@ -1,26 +1,65 @@
-import Link from "next/link";
+// components/Layout.tsx
+import React from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="bg-blue-600 text-white p-4">
-        <nav className="max-w-4xl mx-auto flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold">Mediasaku Kalkulator</Link>
-          <div className="space-x-4">
-            <Link href="/kalkulator" className="hover:underline">Kalkulator</Link>
-            <Link href="/tentang" className="hover:underline">Tentang</Link>
-            <Link href="/kontak" className="hover:underline">Kontak</Link>
-          </div>
-        </nav>
-      </header>
-      <main className="flex-1 max-w-4xl mx-auto p-4">{children}</main>
-      <footer className="bg-gray-100 text-center text-sm py-4">
-        <p>© {new Date().getFullYear()} Mediasaku. Semua hak dilindungi.</p>
-        <p>
-          <Link href="/privacy-policy" className="text-blue-600 hover:underline">Privasi</Link> |{" "}
-          <Link href="/terms" className="text-blue-600 hover:underline">Syarat</Link>
-        </p>
-      </footer>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow container mx-auto px-4 py-8">
+        {children}
+      </main>
+      <Footer />
     </div>
+  );
+};
+
+export default Layout;
+
+
+// components/Navbar.tsx
+import React from 'react';
+import Link from 'next/link';
+
+const Navbar = () => {
+  return (
+    <nav className="bg-blue-600 text-white p-4 shadow-md">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link href="/">
+          <span className="text-xl font-bold">Mediasaku Kalkulator</span>
+        </Link>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+
+
+// components/Footer.tsx
+import React from 'react';
+
+const Footer = () => {
+  return (
+    <footer className="bg-gray-100 text-center py-4 mt-8 border-t">
+      <p className="text-sm text-gray-600">&copy; {new Date().getFullYear()} Mediasaku. All rights reserved.</p>
+    </footer>
+  );
+};
+
+export default Footer;
+
+
+// pages/_app.tsx
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
+import Layout from '@/components/Layout';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
 }
