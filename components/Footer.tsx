@@ -1,12 +1,10 @@
-// components/Footer.tsx
-import React from 'react';
-
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="bg-gray-200 text-center p-4">
-      <p>&copy; {new Date().getFullYear()} Mediasaku. All rights reserved.</p>
+    <footer className="bg-gray-100 text-center py-4 mt-8 text-sm text-gray-600">
+      <p>© 2025 Mediasaku. Semua hak dilindungi.</p>
+      <p className="mt-1">
+        <a href="/privasi" className="hover:underline">Privasi</a> | <a href="/syarat" className="hover:underline">Syarat</a>
+      </p>
     </footer>
   );
-};
-
-export default Footer;
+}
